@@ -1,0 +1,23 @@
+nginx:
+  image: nginx
+  ports:
+    - "8080:8080"
+  volumes:
+    - ./etc/vhost.conf:/etc/nginx/conf.d/hhpnet.conf
+    - ./:/code
+  links:
+    - php:php
+
+php:
+  build: ./
+  ports:
+    - "9000:9000"
+  volumes:
+    - ./:/code
+  links:
+    - mongodb:mongodb
+
+mongodb:
+  image: mongo
+  volumes:
+    - ./datadir:/data/db

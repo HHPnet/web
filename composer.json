@@ -6,7 +6,8 @@
         "hhpnet/core": "^1.0",
         "slim/slim": "^3.3",
         "twig/twig": "^1.24",
-        "slim/twig-view": "^2.1"
+        "slim/twig-view": "^2.1",
+        "twbs/bootstrap": "^3.3"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.5"
@@ -26,7 +27,12 @@
         }
     },
     "scripts": {
-        "test": "bin/phpspec run --format=pretty --verbose --ansi"
+        "test": "bin/phpspec run --format=pretty --verbose --ansi",
+        "post-update-cmd": [
+            "if [ -d \"public/css/bootstrap\" ]; then rm -Rf public/css/bootstrap/; fi",
+            "mkdir -p public/css/bootstrap/",
+            "cp -R vendor/twbs/bootstrap/dist/* public/css/bootstrap/"
+        ]
     },
     "config": {
         "bin-dir": "bin"
